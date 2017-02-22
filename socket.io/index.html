@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+scoket.io
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    /**
+     * /socket.io/socket.io.js 这个是固定路径
+     * app.get('/socket.io/socket.io.js',(req,res)=>{
+     *   res.sendfile('路径')
+     * })
+     * 当加载/socket.io/socket.io.js完成返回io对象
+     */
+    window.onload = () => {
+        let socket = io.connect('/');
+        socket.on('connect', () => {
+            document.write('连接成功')
+        });
+
+        socket.on('message', (msg) => {
+            console.log(msg);
+        })
+    }
+</script>
+</html>
