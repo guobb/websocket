@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./bootstrap.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-success">
+                <div class="panel panel-heading">欢迎来到聊天室</div>
+                <div class="panel-body">
+                    <ul class="list-group" id="msgInfo">
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="msg">
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-default" id="sendBtn">发送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    /**
+     * /socket.io/socket.io.js 这个是固定路径
+     * app.get('/socket.io/socket.io.js',(req,res)=>{
+     *   res.sendfile('路径')
+     * })
+     * 当加载/socket.io/socket.io.js完成返回io对象
+     */
+    window.onload = () => {
+        let socket = io.connect('/');
+        socket.on('connect', () => {
+            $('#msgInfo').append('<li class="list-group-item">服务器连接成功</li>')
+        });
+
+        // 监听 服务器发送过来的消息
+        socket.on('message', (msg) => {
+            $('#msgInfo').append('<li class="list-group-item">'+msg+'</li>')
+        });
+
+        $('#sendBtn').click(() => {
+            let message = $("#msg").val();
+            socket.send(message);
+            $("#msg").val('')
+        })
+
+    }
+</script>
+</html>

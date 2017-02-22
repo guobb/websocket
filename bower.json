@@ -1,0 +1,20 @@
+{
+  "name": "websocket",
+  "homepage": "https://github.com/guobb/websocket",
+  "authors": [
+    "guobb <18576469764@163.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}
